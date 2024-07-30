@@ -115,9 +115,6 @@
 - GitHub: [github.com/youngsikkk/customizing-news-app](https://github.com/youngsikkk/customizing-news-app)
 
 
-물론이야! 아래는 영어로 작성된 README.md 파일 예시야.
-
-```markdown
 # Custom News Feed Website
 
 This project is a web application that provides a personalized news feed based on user interests. It uses Next.js for the frontend framework, Tailwind CSS for styling, and Zustand for state management. The backend is built with Express.js to provide APIs and MongoDB is used as the database.
@@ -231,18 +228,5 @@ This project is licensed under the [MIT License](LICENSE).
 
 ## Contact
 
-- Email: [contact@example.com](mailto:contact@example.com)
-- GitHub: [github.com/yourusername/your-repo](https://github.com/yourusername/your-repo)
-```
-
-### Explanation
-
-- **Project Overview**: Describes the purpose of the project and the technologies used.
-- **Installation and Running**: Instructions for setting up and running both the frontend and backend.
-- **Features**: Lists the main features of the application.
-- **Directory Structure**: Explains the organization of the project's folders and files.
-- **Contributing**: Information on how others can contribute to the project.
-- **License**: Specifies the license under which the project is distributed.
-- **Contact**: Provides contact information for further communication.
-
-Feel free to modify or expand on this template based on the specific details of your project!
+- Email: [hys7309.dev@gmail.com](mailto:hys7309.dev@gmail.com)
+- GitHub: [github.com/youngsikkk/customizing-news-app](https://github.com/youngsikkk/customizing-news-app)
