@@ -1,45 +1,78 @@
-import React from "react";
+"use client"
+import React, { useState, useEffect } from "react";
+import Loading from './Loading';
+
+const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
 const MainPage = () => {
+    const [newsData, setNewsData] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [selectedTopic, setSelectedTopic] = useState('home');
+    
+    useEffect(() => {
+        const fetchNews = async () => {
+            setLoading(true);
+            setError(null);
+            try {
+                const response = await fetch(`https://api.nytimes.com/svc/topstories/v2/${selectedTopic}.json?api-key=${API_KEY}`);
+                const data = await response.json();
+                console.log(data);
+                setNewsData(data.results);
+            } catch (error) {
+                setError(error);
+            }
+            setLoading(false);
+        };
+        console.log(selectedTopic);
+        fetchNews();
+    }, [selectedTopic]);
+
     return(
         <section className="flex flex-col">
             <div className="flex justify-between items-center">
-                <h1 className="m-4 p-2 text-3xl font-bold">오늘의 헤드라인</h1>
+                <h1 className="m-4 p-2 text-3xl font-bold">{selectedTopic.toUpperCase()}</h1>
                 <div className="flex flex-col m-4 items-end">
-                    <label htmlFor="topics" className="p-2 text-xl block text-gray-700">주제 선택</label>
-                    <select id="topics" className="p-2 border rounded-lg">
-                        <option>모든 뉴스</option>
-                        <option>테크</option>
-                        <option>정치</option>
-                        <option>스포츠</option>
+                    <label htmlFor="topics" className="p-2 text-xl block text-gray-700">Select Subject</label>
+                    <select 
+                        id="topics" 
+                        className="p-2 border rounded-lg"
+                        value={selectedTopic}
+                        onChange={(e) => setSelectedTopic(e.target.value)}
+                    >
+                        <option value="home">Home</option>
+                        <option value="technology">Technology</option>
+                        <option value="business">Business</option>
+                        <option value="health">Health</option>
+                        <option value="sports">Sports</option>
+                        <option value="science">Science</option>
+                        <option value="movies">Movies</option>
+                        <option value="politics">Politics</option>
+                        <option value="world">World</option>
                     </select>
                 </div>
             </div>
+            {error && <p className="text-center mt-10 text-red-500">에러가 발생했습니다: {error.message}</p>}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-10">
-                {/* 데이터 받으면 map 이용해서 한 번에 렌더링 */}
-                <div className="bg-white p-4 rounded-lg shadow-md m-4 duration-150 hover:shadow-lg">
-                    <img src="thumbnail.jpg" alt="뉴스 이미지" className="w-full h-52 lg:h-70 2xl:h-80 object-cover rounded-lg"/>
-                    <h2 className="text-lg font-semibold mt-2">뉴스 제목</h2>
-                    <p className="mt-2 text-gray-600">뉴스 요약 내용...</p>
-                    <a href="#" className="text-blue-600 mt-2 block">자세히 보기</a>
-                </div>
-                <div className="bg-white p-4 rounded-lg shadow-md m-4 duration-150 hover:shadow-lg">
-                    <img src="thumbnail.jpg" alt="뉴스 이미지" className="w-full h-52 lg:h-70 2xl:h-80 object-cover rounded-lg"/>
-                    <h2 className="text-lg font-semibold mt-2">뉴스 제목</h2>
-                    <p className="mt-2 text-gray-600">뉴스 요약 내용...</p>
-                    <a href="#" className="text-blue-600 mt-2 block">자세히 보기</a>
-                </div>
-                <div className="bg-white p-4 rounded-lg shadow-md m-4 duration-150 hover:shadow-lg">
-                    <img src="thumbnail.jpg" alt="뉴스 이미지" className="w-full h-52 lg:h-70 2xl:h-80 object-cover rounded-lg"/>
-                    <h2 className="text-lg font-semibold mt-2">뉴스 제목</h2>
-                    <p className="mt-2 text-gray-600">뉴스 요약 내용...</p>
-                    <a href="#" className="text-blue-600 mt-2 block">자세히 보기</a>
-                </div>
+                {loading ?
+                <>
+                    <Loading/>
+                    <Loading/>
+                    <Loading/>
+                </>
+                :
+                 newsData.map((news, index) => (
+                    <div key={index} className="bg-white p-4 rounded-lg shadow-md m-4 duration-150 hover:shadow-lg">
+                        {news.multimedia && news.multimedia[0] && (
+                            <img src={news.multimedia[0].url} alt="뉴스 이미지" className="w-full h-70 lg:h-96 object-cover rounded-lg"/>
+                        )}
+                        <h2 className="text-lg font-semibold mt-2">{news.title}</h2>
+                        <p className="mt-2 text-gray-600">{news.abstract}</p>
+                        <a href={news.url} target="_blank" className="text-blue-600 mt-2 block">자세히 보기</a>
+                    </div>
+                ))}
             </div>
-            <div className="mt-4 flex justify-between">
-                <button type="button" class="ml-4 text-gray-900 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-100 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700">이전</button>
-                <button type="button" class="mr-4 text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800">다음</button>
-            </div>
+            
         </section>
     )
 }
