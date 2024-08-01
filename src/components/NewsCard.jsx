@@ -7,6 +7,10 @@ const NewsCard = ({ news }) => (
         )}
         <h2 className="text-lg font-semibold mt-2">{news.title}</h2>
         <p className="mt-2 text-gray-600 mb-6">{news.abstract}</p>
+        <div className='flex'>
+            <p className="mt-2 text-gray-600 mb-6">{news.updated_date.substring(0,10)}</p>
+            <p className="mt-2 text-gray-600 mb-6 ml-2">{news.updated_date.substring(11,19)}</p>
+        </div>
         <a href={news.url} target="_blank" rel="noopener noreferrer" className="absolute bottom-3 text-blue-600 block hover:underline">Learn more</a>
     </div>
 );
