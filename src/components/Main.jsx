@@ -1,7 +1,6 @@
 "use client"
 import React, { useState, useEffect } from "react";
-import Loading from './Loading';
-import ErrorPage from "./Error";
+import NewsList from "./NewsList";
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
@@ -59,29 +58,11 @@ const MainPage = () => {
                     </select>
                 </div>
             </div>
-            {/* need component divide */}
-            {error ? <ErrorPage/> : 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-10">
-                {loading ?
-                <>
-                    <Loading/>
-                    <Loading/>
-                    <Loading/>
-                </>
-                :
-                 newsData.map((news, index) => (
-                    
-                    <div key={index} className="flex flex-col relative bg-white p-4 rounded-lg shadow-md m-4 duration-150 hover:shadow-lg">
-                        {news.multimedia && news.multimedia[0] && (
-                            <img src={news.multimedia[0].url} alt="News Image" className="w-full h-70 lg:h-96 object-cover rounded-lg"/>
-                        )}
-                        <h2 className="text-lg font-semibold mt-2">{news.title}</h2>
-                        <p className="mt-2 text-gray-600 mb-6">{news.abstract}</p>
-                        <a href={news.url} target="_blank" className="absolute bottom-3 text-blue-600 mt-2 block hover:underline">Learn more</a>
-                    </div>
-                ))}
-            </div>
-            }
+            <NewsList 
+                error={error} 
+                loading={loading} 
+                newsData={newsData} 
+            />
         </section>
     )
 }
