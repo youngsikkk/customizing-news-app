@@ -1,14 +1,17 @@
 "use client"
 import React, { useState, useEffect } from "react";
 import Loading from './Loading';
+import ErrorPage from "./Error";
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY;
 
 const MainPage = () => {
     const [newsData, setNewsData] = useState([]);
+    const [today, setToday] = useState("");
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [selectedTopic, setSelectedTopic] = useState('home');
+    const date = new Date();
     
     useEffect(() => {
         const fetchNews = async () => {
@@ -17,21 +20,25 @@ const MainPage = () => {
             try {
                 const response = await fetch(`https://api.nytimes.com/svc/topstories/v2/${selectedTopic}.json?api-key=${API_KEY}`);
                 const data = await response.json();
-                console.log(data);
+                const day = date.getDate() >= 1 && date.getDate() <= 9 ? `0${date.getDate()}` : date.getDate();
+                const month = date.getMonth() + 1 >= 1 && date.getMonth() + 1 <= 9 ? `0${date.getMonth() + 1}` : date.getMonth() + 1;
                 setNewsData(data.results);
+                setToday(`${date.getFullYear()}-${month}-${day}`);
             } catch (error) {
                 setError(error);
             }
             setLoading(false);
         };
-        console.log(selectedTopic);
         fetchNews();
     }, [selectedTopic]);
 
     return(
         <section className="flex flex-col">
             <div className="flex justify-between items-center">
-                <h1 className="m-4 p-2 text-3xl font-bold">{selectedTopic.toUpperCase()}</h1>
+                <div className="flex flex-col">
+                    <h1 className="m-4 p-2 text-3xl font-bold">{selectedTopic.toUpperCase()}</h1>
+                    <h3 className="m-4 mt-0 p-2 pt-0 text-xl">{today}</h3>
+                </div>
                 <div className="flex flex-col m-4 items-end">
                     <label htmlFor="topics" className="p-2 text-xl block text-gray-700">Select Subject</label>
                     <select 
@@ -52,7 +59,8 @@ const MainPage = () => {
                     </select>
                 </div>
             </div>
-            {error && <p className="text-center mt-10 text-red-500">에러가 발생했습니다: {error.message}</p>}
+            {/* need component divide */}
+            {error ? <ErrorPage/> : 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-10">
                 {loading ?
                 <>
@@ -62,17 +70,18 @@ const MainPage = () => {
                 </>
                 :
                  newsData.map((news, index) => (
-                    <div key={index} className="bg-white p-4 rounded-lg shadow-md m-4 duration-150 hover:shadow-lg">
+                    
+                    <div key={index} className="flex flex-col relative bg-white p-4 rounded-lg shadow-md m-4 duration-150 hover:shadow-lg">
                         {news.multimedia && news.multimedia[0] && (
-                            <img src={news.multimedia[0].url} alt="뉴스 이미지" className="w-full h-70 lg:h-96 object-cover rounded-lg"/>
+                            <img src={news.multimedia[0].url} alt="News Image" className="w-full h-70 lg:h-96 object-cover rounded-lg"/>
                         )}
                         <h2 className="text-lg font-semibold mt-2">{news.title}</h2>
-                        <p className="mt-2 text-gray-600">{news.abstract}</p>
-                        <a href={news.url} target="_blank" className="text-blue-600 mt-2 block">자세히 보기</a>
+                        <p className="mt-2 text-gray-600 mb-6">{news.abstract}</p>
+                        <a href={news.url} target="_blank" className="absolute bottom-3 text-blue-600 mt-2 block hover:underline">Learn more</a>
                     </div>
                 ))}
             </div>
-            
+            }
         </section>
     )
 }
