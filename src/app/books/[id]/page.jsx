@@ -28,6 +28,9 @@ const BookDetail = () => {
                     <p className="font-bold p-2">Books A Million | <a className="font-normal hover:underline" href={million}>{million}</a></p>
                     <p className="font-bold p-2">Bookshop | <a className="font-normal hover:underline" href={bookshop}>{bookshop}</a></p>
                 </div>
+                <div className="mt-20">
+                    <p className="font-bold text-gray-600">Legal Notice and Disclaimer: The website listed above is not the seller of the products.</p>
+                </div>
             </div>
         </div>
     )
