@@ -19,8 +19,8 @@ const BooksHome = () => {
             setError(null);
             try {
                 const response = await fetch(`https://api.nytimes.com/svc/books/v3/lists/overview.json?api-key=${API_KEY}`);
-                const data = await response.json();                
-                setBookData(data.results.lists);
+                const data = await response.json(); 
+                                setBookData(data.results.lists);
             } catch (error) {
                 setError(error);
             }
@@ -58,7 +58,7 @@ const BooksHome = () => {
                                 <h1 className="text-lg font-semibold mt-2">{book.title}</h1>
                                 <h3 className="text-md font-semibold mt-2">{book.author}</h3>
                                 <p className="mt-2 text-gray-600 mb-8">{book.description}</p>
-                                <button className="absolute bottom-2 left-1"><FaCaretRight className="text-3xl" /></button>
+                                <a href={`/books/detail?title=${book.title}&author=${book.author}&publisher=${book.publisher}&description=${book.description}&img=${book.book_image}&amazon=${book.amazon_product_url}&apple=${book.buy_links[1].url}&barnes=${book.buy_links[2].url}&booksamillion=${book.buy_links[3].url}&bookshop=${book.buy_links[4].url}`} className="absolute bottom-2 left-1"><FaCaretRight className="text-3xl" /></a>
                             </div>
                         ))}
                     </div>
