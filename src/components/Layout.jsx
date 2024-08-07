@@ -9,8 +9,7 @@ const Layout = ({ children }) => {
 
   return (
     <div className='h-auto min-h-screen'>
-      {menu && <MenuBar />}
-      <main>{children}</main>
+      {menu ? <MenuBar /> : <main>{children}</main>}
     </div>
   );
 };
