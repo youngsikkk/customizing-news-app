@@ -1,7 +1,12 @@
+"use client"
 import React from "react";
 import SearchBar from "./SearchBar";
 import { TbMoon } from "react-icons/tb";
+import { IoMenu } from "react-icons/io5";
+import { useMenuStore } from "../store/store"
 const Header = () => {
+    const { menu, setMenu, closeMenu } = useMenuStore();
+
     return(
         <nav className="flex justify-between border-b-2 items-center">
             <div className="flex">
@@ -18,9 +23,10 @@ const Header = () => {
             <div className="flex">
                 <div className="flex p-4 justify-center items-center">
                     <SearchBar/>
-                    <button className="p-4"><TbMoon className="text-2xl"/></button>
-                    <button className="p-4"><a href="/signup">Sign Up</a></button>
-                    <button className="p-4"><a href="login">Sign In</a></button>
+                    <button className="p-4 lg:hidden" onClick={setMenu}><IoMenu className="text-3xl"/></button>
+                    <button className="p-4 hidden lg:block"><TbMoon className="text-2xl"/></button>
+                    <button className="hidden lg:block p-4"><a className="block" href="/signup">Sign Up</a></button>
+                    <button className="hidden lg:block p-4"><a className="block" href="login">Sign In</a></button>
                 </div>
             </div>
         </nav>
