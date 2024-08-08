@@ -32,7 +32,6 @@ const SearchPage = () => {
                 const response = await fetch(`https://api.nytimes.com/svc/search/v2/articlesearch.json?q=${search}&api-key=${API_KEY}`);
                 const data = await response.json();
                 setNewsData(data.response.docs);
-                console.log(data.response.docs);
                 setTempSearch("");
             } catch(e) {
                 alert(e);
