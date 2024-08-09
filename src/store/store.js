@@ -1,4 +1,5 @@
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 export const useMenuStore = create((set) => ({
     // 상태 선언
@@ -7,3 +8,10 @@ export const useMenuStore = create((set) => ({
     setMenu: () => set((state) => ({menu: !state.menu})),
     closeMenu:() => set({ menu: false })
 }));
+
+export const useDarkStore = create(persist((set) => ({
+    isDark: false,
+    setDark: () => set((state) => ({isDark: !state.isDark}))
+}), {
+    name: "dark-mode-storage"
+}))
