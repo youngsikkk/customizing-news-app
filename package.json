@@ -12,12 +12,15 @@
     "@headlessui/react": "^2.1.2",
     "@heroicons/react": "^2.1.5",
     "autoprefixer": "^10.4.19",
+    "gray-matter": "^4.0.3",
     "headlessui": "^0.0.0",
     "heroicons": "^2.1.5",
     "next": "14.2.5",
     "react": "^18",
     "react-dom": "^18",
     "react-icons": "^5.2.1",
+    "remark": "^15.0.1",
+    "remark-html": "^16.0.1",
     "zustand": "^4.5.4"
   },
   "devDependencies": {
