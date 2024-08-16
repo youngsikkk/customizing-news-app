@@ -58,7 +58,12 @@ const BooksHome = () => {
                                 <h1 className="text-lg font-semibold mt-2">{book.title}</h1>
                                 <h3 className="text-md font-semibold mt-2">{book.author}</h3>
                                 <p className="mt-2 text-gray-600 mb-8">{book.description}</p>
-                                <a href={`/books/detail?title=${book.title}&author=${book.author}&publisher=${book.publisher}&description=${book.description}&img=${book.book_image}&amazon=${book.amazon_product_url}&apple=${book.buy_links[1].url}&barnes=${book.buy_links[2].url}&booksamillion=${book.buy_links[3].url}&bookshop=${book.buy_links[4].url}`} className="absolute bottom-2 left-1"><FaCaretRight className="text-3xl" /></a>
+                                <a href={`/books/detail?title=${book.title}&author=${book.author}&publisher=${book.publisher}&description=${book.description}&img=${book.book_image}&amazon=${book.amazon_product_url}&apple=${book.buy_links[1].url}&barnes=${book.buy_links[2].url}&booksamillion=${book.buy_links[3].url}&bookshop=${book.buy_links[4].url}`} className="absolute bottom-2 left-1">
+                                    <div className="flex items-center">
+                                        <FaCaretRight className="text-3xl" />
+                                        <p className="text-md hover:underline hover:text-blue-500">Detail</p>
+                                    </div>
+                                </a>
                             </div>
                         ))}
                     </div>
