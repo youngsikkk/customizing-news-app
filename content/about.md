@@ -8,7 +8,7 @@ This site is designed to provide you with easy access to the latest and most imp
 
 - **Headlines**: Stay updated with the most critical news of the day, directly sourced from The New York Times.
 - **Most Popular**: Discover the most-read articles, and set your preferred time frame to see what's trending.
-- **Archive**: Explore historical articles dating back to the 1800s. Dive into the rich history of journalism and see how events were covered over the centuries.
+- **Archive**: Explore historical articles dating back to the 1851. Dive into the rich history of journalism and see how events were covered over the centuries. You can use this feature on the search page.
 - **Search**: Easily find specific articles or topics using our robust search functionality.
 - **Book Recommendations**: Browse through books recommended by The New York Times and find your next great read.
 
