@@ -18,7 +18,6 @@ const Header = () => {
             <ul className="p-4 hidden lg:flex">
                 <li className="p-4 text-gray-600/60 font-bold hover:text-blue-500 "><a href="/">Home</a></li>
                 <li className="p-4 text-gray-600/60 font-bold hover:text-blue-500"><a href="/mostpopular">Most Popular</a></li>
-                <li className="p-4 text-gray-600/60 font-bold hover:text-blue-500"><a href="/archive">Archive</a></li>
                 <li className="p-4 text-gray-600/60 font-bold hover:text-blue-500"><a href="/articlesearch">Article Search</a></li>
                 <li className="p-4 text-gray-600/60 font-bold hover:text-blue-500"><a href="/books">Books</a></li>
                 <li className="p-4 text-gray-600/60 font-bold hover:text-blue-500"><a href="/about">About</a></li>

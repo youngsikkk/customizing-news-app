@@ -11,7 +11,6 @@ const Footer = () => {
                     <li><a href="/" className="hover:underline">Home</a></li>
                     <li><a href="/about" className="hover:underline">About</a></li>
                     <li><a href="/mostpopular" className="hover:underline">Most Popular</a></li>
-                    <li><a href="/archive" className="hover:underline">Archive</a></li>
                     <li><a href="/articlesearch" className="hover:underline">Article Search</a></li>
                     <li><a href="/books" className="hover:underline">Books</a></li>
                     <li><a href="/privacy" className="hover:underline">Privacy Policy</a></li>
