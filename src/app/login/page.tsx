@@ -1,6 +1,11 @@
-import React from "react";
+"use client"
+import React, { useState } from "react";
 
 const LoginPage = () => {
+    
+    const [id, setId] = useState("");
+    const [password, setPassword] = useState("");
+    
     return (
         <div className="flex min-h-screen items-center justify-center ">
             <div className="w-full max-w-md p-8 bg-white shadow-lg rounded-lg">
@@ -12,6 +17,7 @@ const LoginPage = () => {
                             id="username"
                             type="text"
                             placeholder="Enter your username"
+                            onChange={(e) => {setId(e.target.value)}}
                             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                         />
                     </div>
@@ -21,6 +27,7 @@ const LoginPage = () => {
                             id="password"
                             type="password"
                             placeholder="Enter your password"
+                            onChange={(e) => {setPassword(e.target.value)}}
                             className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 sm:text-sm"
                         />
                     </div>
